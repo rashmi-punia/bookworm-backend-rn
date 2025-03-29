@@ -6,29 +6,19 @@ import { connectDb } from "./lib/db.js";
 import cors from "cors";
 import job from "./lib/cron.js";
 
-
-
 const app = express();
 const PORT = process.env.PORT || 3001;
-
 
 job.start();
 
 app.use(express.json()); //middleware
 app.use(cors());
 
+app.use("/api/auth", authRoutes);
+app.use("/api/books", bookRoutes);
 
+app.listen(PORT, () => {
+  console.log("Server is running on port 3000");
 
-
-app.use('/api/auth', authRoutes);
-app.use('/api/books', bookRoutes);
-
-
-
-
-app.listen(PORT , () => {
-    console.log("Server is running on port 3000");
-
-    connectDb();
-    
-})
+  connectDb();
+});
