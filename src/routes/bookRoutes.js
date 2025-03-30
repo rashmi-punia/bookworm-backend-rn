@@ -39,6 +39,7 @@ router.get("/", protectRoute, async (req, res) => {
   try {
     const page = req.query.page || 1;
     const limit = req.query.limit || 5;
+    const skip = (page - 1) * limit;
 
     const books = await Book.find()
       .sort({ createdAt: -1 }) //desc
