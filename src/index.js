@@ -12,6 +12,13 @@ const PORT = process.env.PORT || 3001;
 job.start();
 
 app.use(express.json()); //middleware
+
+// const corsOptions = {
+//   origin: ["https://your-app.vercel.app", "exp://your-eas-deploy"],
+//   credentials: true,
+// };
+// app.use(cors(corsOptions));
+
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
